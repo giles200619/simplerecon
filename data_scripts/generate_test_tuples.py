@@ -57,8 +57,8 @@ from pathlib import Path
 
 import numpy as np
 import options
-import tools.keyframe_buffer
-from tools.keyframe_buffer import DVMVS_Config
+import simplerecon_tools.keyframe_buffer
+from simplerecon_tools.keyframe_buffer import DVMVS_Config
 from utils.dataset_utils import get_dataset
 
 
@@ -86,7 +86,7 @@ def compute_offline_tuple(
     """
     sample = {'indices': [current_keyframe_index]}
 
-    tuple_keyframe_buffer = tools.keyframe_buffer.OfflineKeyframeBuffer(
+    tuple_keyframe_buffer = simplerecon_tools.keyframe_buffer.OfflineKeyframeBuffer(
                 buffer_size=DVMVS_Config.test_keyframe_buffer_size*2,
                 keyframe_pose_distance=DVMVS_Config.test_keyframe_pose_distance,
                 optimal_t_score=DVMVS_Config.test_optimal_t_measure,
@@ -178,7 +178,7 @@ def default_dvmvs_tuples(scan, poses, dists_to_last_valid, n_measurement_frames)
         samples: a list of dictionaries where each item dicitonary contians 
             a scan's id and a list of indices for the tuple's frames.
     """
-    keyframe_buffer = tools.keyframe_buffer.KeyframeBuffer(
+    keyframe_buffer = simplerecon_tools.keyframe_buffer.KeyframeBuffer(
                 buffer_size=DVMVS_Config.test_keyframe_buffer_size,
                 keyframe_pose_distance=DVMVS_Config.test_keyframe_pose_distance,
                 optimal_t_score=DVMVS_Config.test_optimal_t_measure,
@@ -233,7 +233,7 @@ def offline_dvmvs_tuples(scan, poses, n_measurement_frames):
 
     samples = []
     
-    keyframe_buffer = tools.keyframe_buffer.KeyframeBuffer(
+    keyframe_buffer = simplerecon_tools.keyframe_buffer.KeyframeBuffer(
                 buffer_size=DVMVS_Config.test_keyframe_buffer_size,
                 keyframe_pose_distance=DVMVS_Config.test_keyframe_pose_distance,
                 optimal_t_score=DVMVS_Config.test_optimal_t_measure,
@@ -292,7 +292,7 @@ def dense_dvmvs_tuples(scan, poses, n_measurement_frames):
         reference_pose = poses[i]
 
 
-        keyframe_buffer = tools.keyframe_buffer.OfflineKeyframeBuffer(
+        keyframe_buffer = simplerecon_tools.keyframe_buffer.OfflineKeyframeBuffer(
                 buffer_size=DVMVS_Config.test_keyframe_buffer_size,
                 keyframe_pose_distance=DVMVS_Config.test_keyframe_pose_distance,
                 optimal_t_score=DVMVS_Config.test_optimal_t_measure,

@@ -158,6 +158,9 @@ def quick_viz_export(
 
         pil_image.save(os.path.join(output_path, f"{frame_id}_pred_depth.png"))
 
+        depth_image = outputs["depth_pred_s0_b1hw"][elem_ind].cpu().detach().numpy()
+        np.save(os.path.join(output_path, f"{frame_id}_pred_depth_raw.npy"), depth_image[0])
+
         main_color_3hw = cur_data["high_res_color_b3hw"][elem_ind]
         main_color_3hw = reverse_imagenet_normalize(main_color_3hw)
         pil_image = Image.fromarray(

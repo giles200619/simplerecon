@@ -117,7 +117,7 @@ from tqdm import tqdm
 
 from experiment_modules.depth_model import DepthModel
 import options
-from tools import fusers_helper
+from simplerecon_tools import fusers_helper
 from utils.dataset_utils import get_dataset
 from utils.generic_utils import to_gpu, cache_model_outputs
 from utils.metrics_utils import ResultsAverager, compute_depth_metrics_batched

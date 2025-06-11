@@ -5,7 +5,7 @@ import trimesh
 from datasets.scannet_dataset import ScannetDataset
 from utils.generic_utils import reverse_imagenet_normalize
 
-from tools.tsdf import TSDF, TSDFFuser
+from simplerecon_tools.tsdf import TSDF, TSDFFuser
 
 
 class DepthFuser():

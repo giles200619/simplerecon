@@ -5,10 +5,12 @@ import timm
 import torch
 import torch.nn.functional as F
 from losses import MSGradientLoss, MVDepthLoss, NormalsLoss, ScaleInvariantLoss
+
 from modules.cost_volume import CostVolumeManager, FeatureVolumeManager
 from modules.layers import TensorFormatter
 from modules.networks import (CVEncoder, DepthDecoderPP, UNetMatchingEncoder,
-                             ResnetMatchingEncoder)
+                                 ResnetMatchingEncoder)
+
 from torch import nn
 from utils.generic_utils import (reverse_imagenet_normalize, tensor_B_to_bM,
                                  tensor_bM_to_B)

@@ -13,7 +13,7 @@ import PIL.Image as pil
 
 logger = logging.getLogger(__name__)
 
-class ARKitDataset(GenericMVSDataset):
+class violaDataset(GenericMVSDataset):
     """ 
     Reads dataset data processed with NeuralRecon ARKit processing scripts.
 
@@ -121,10 +121,6 @@ class ARKitDataset(GenericMVSDataset):
 
         self.image_resampling_mode = pil.BICUBIC
 
-    @staticmethod
-    def get_sub_folder_dir(split):
-        return "scans"
-
     def get_frame_id_string(self, frame_id):
         """ Returns an id string for this frame_id that's unique to this frame
             within the scan.
@@ -137,8 +133,7 @@ class ARKitDataset(GenericMVSDataset):
     def get_valid_frame_path(self, split, scan):
         """ returns the filepath of a file that contains valid frame ids for a 
             scan. """
-        scan_dir = os.path.join(self.dataset_path, 
-                            self.get_sub_folder_dir(split), scan)
+        scan_dir = os.path.join(self.dataset_path, scan)
 
         return os.path.join(scan_dir, "valid_frames.txt")
 
@@ -174,8 +169,7 @@ class ARKitDataset(GenericMVSDataset):
             print(f"Compuiting valid frames for scene {scan}.")
 
             # find out which frames have valid poses 
-            scan_dir = os.path.join(self.dataset_path, 
-                                        self.get_sub_folder_dir(split), scan)
+            scan_dir = os.path.join(self.dataset_path, scan)
 
             all_frame_ids = [x[2] for x 
                                 in os.walk(os.path.join(scan_dir, "images"))][0]
@@ -195,11 +189,11 @@ class ARKitDataset(GenericMVSDataset):
                     color_filename = os.path.join(color_path, f"{frame_id}.png")
                     
                     # load intrinsics
-                    _ = self.load_intrinsics(scan, frame_id)
+                    #_ = self.load_intrinsics(scan, frame_id)
 
                     # Load image
-                    _ = read_image_file(color_filename, 
-                            height=self.image_height, width=self.image_width)
+                    #_ = read_image_file(color_filename, 
+                    #        height=self.image_height, width=self.image_width)
 
                     # check pose
                     world_T_cam, _ = self.load_pose(scan, frame_id)
